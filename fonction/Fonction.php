@@ -23,7 +23,7 @@ function getuser($identifiant,$motdepasse,$type){
     $requete=sprintf($requete,$identifiant,$motdepasse,$type);
     $result=mysqli_query($base,$requete);
      while($donnees=mysqli_fetch_assoc($result)){
-         $rep=$donnees['id'];
+         $rep=$donnees['id_User'];
      }  
     return $rep;
 } 
@@ -31,10 +31,10 @@ function getinfo($id,$table){
     $rep=array();
     $base=dbconnect();
     $requete="select * from %s where id_%s='%d'";
-    $requete=printf($requete,$table,$table,$id);
+    $requete=sprintf($requete,$table,$table,$id);
     $result=mysqli_query($base,$requete);
      while($donnees=mysqli_fetch_assoc($result)){
-         $rep=$donnees;
+         $rep[]=$donnees;
      }  
     return $rep;
 }
