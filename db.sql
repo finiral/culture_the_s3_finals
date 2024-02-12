@@ -1,6 +1,13 @@
 create database thecompany;
 use thecompany;
 
+CREATE TABLE User(
+    id_User INT AUTO_INCREMENT PRIMARY KEY,
+    Pseudo VARCHAR(100),
+    Mdp VARCHAR(255),
+    Type_User SMALLINT
+)Engine=innodb;
+
 CREATE TABLE The(
     id_The INT AUTO_INCREMENT,
     Nom_The VARCHAR(50),
