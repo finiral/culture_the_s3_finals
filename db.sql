@@ -2,52 +2,52 @@ create database thecompany;
 use thecompany;
 
 CREATE TABLE The(
-    idThe INT AUTO_INCREMENT,
-    NomThe VARCHAR(50),
+    id_The INT AUTO_INCREMENT,
+    Nom_The VARCHAR(50),
     Occupation DOUBLE,
     Rendement DOUBLE,
-    PRIMARY KEY (idThe)
+    PRIMARY KEY (id_The)
 )Engine=innodb;
 
 CREATE TABLE Parcelle (
-    idParcelle INT AUTO_INCREMENT PRIMARY KEY,
-    idThe INT NOT NULL,
-    SurfaceTotal DOUBLE NOT NULL,
-    FOREIGN KEY (idThe) REFERENCES The(idThe)
+    id_Parcelle INT AUTO_INCREMENT PRIMARY KEY,
+    id_The INT NOT NULL,
+    Surface_Parcelle DOUBLE NOT NULL,
+    FOREIGN KEY (id_The) REFERENCES The(id_The)
 )Engine=innodb;
 
 CREATE TABLE Cueilleur (
-    idCueilleur INT AUTO_INCREMENT PRIMARY KEY,
-    NomCueilleur VARCHAR(255) NOT NULL,
+    id_Cueilleur INT AUTO_INCREMENT PRIMARY KEY,
+    Nom_Cueilleur VARCHAR(255) NOT NULL,
     Genre CHAR(1) NOT NULL,
-    DtnNaissance DATE NOT NULL
+    Dtn DATE NOT NULL
 )Engine=innodb;
 
 CREATE TABLE Cueillette (
     idCueillette INT AUTO_INCREMENT PRIMARY KEY,
-    idCueilleur INT NOT NULL,
-    idParcelle INT NOT NULL,
-    DateCueillette DATE NOT NULL,
-    PoidsCueilli DOUBLE NOT NULL,
-    FOREIGN KEY (idCueilleur) REFERENCES Cueilleur(idCueilleur),
-    FOREIGN KEY (idParcelle) REFERENCES Parcelle(idParcelle)
+    id_Cueilleur INT NOT NULL,
+    id_Parcelle INT NOT NULL,
+    Date_Cueillette DATE NOT NULL,
+    Poids_Cueilli DOUBLE NOT NULL,
+    FOREIGN KEY (id_Cueilleur) REFERENCES Cueilleur(id_Cueilleur),
+    FOREIGN KEY (id_Parcelle) REFERENCES Parcelle(id_Parcelle)
 )Engine=innodb;
 
 CREATE TABLE CateDepense (
-    idCateDepense INT AUTO_INCREMENT PRIMARY KEY,
-    NomCateDepense VARCHAR(150) NOT NULL
+    id_CateDepense INT AUTO_INCREMENT PRIMARY KEY,
+    Nom_CateDepense VARCHAR(150) NOT NULL
 )Engine=innodb;
 
 CREATE TABLE MvtDepense (
-    idDepense INT AUTO_INCREMENT PRIMARY KEY,
-    idCateDepense INT NOT NULL,
+    id_Depense INT AUTO_INCREMENT PRIMARY KEY,
+    id_CateDepense INT NOT NULL,
     Montant DOUBLE NOT NULL,
-    DateDepense DATE NOT NULL,
-    FOREIGN KEY (idCateDepense) REFERENCES CateDepense(idCateDepense)
+    Date_Depense DATE NOT NULL,
+    FOREIGN KEY (id_CateDepense) REFERENCES CateDepense(id_CateDepense)
 )Engine=innodb;
 
 CREATE TABLE MvtSalaire (
-    idSalaire INT AUTO_INCREMENT PRIMARY KEY,
+    id_Salaire INT AUTO_INCREMENT PRIMARY KEY,
     Montant DOUBLE NOT NULL,
-    DateSalaire DATE NOT NULL
+    Date_Salaire DATE NOT NULL
 )Engine=innodb;
