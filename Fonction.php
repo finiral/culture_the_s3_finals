@@ -27,7 +27,7 @@ function getuser($identifiant,$motdepasse){
 function getinfo($id){
     $rep=array();
     $base=dbconnect();
-    $result=mysqli_query($base,"select * from employes where id='%o'");
+    $result=mysqli_query($base,"select * from employes where id='%i'");
     sprintf($result,$id);
      while($donnees=mysqli_fetch_assoc($result)){
          $rep=$donnees;
