@@ -19,6 +19,8 @@ else{
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Hugo 0.118.2">
+  <link rel="stylesheet" href="../../assets/css/Mycss.css">
+
   <title>Admin Dashboard</title>
 
   <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/">
@@ -233,7 +235,7 @@ else{
   <!-- HEADER -->
   <?php include "./admin_header.php"; ?>
 
-  <div class="container-fluid">
+  <div class="container-fluid content">
     <div class="row">
       <?php include "./admin_sidebar.php"; ?>
       <!-- CONTENT -->
@@ -243,6 +245,8 @@ else{
       </main>
     </div>
   </div>
+  <?php include "../footer.php"; ?>
+
   <script src="../../assets/js/bootstrap.bundle.min.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script>
