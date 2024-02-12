@@ -1,6 +1,6 @@
 <div class="form-container">
     <h2 class="mb-4">Insertion variété de thé</h2>
-    <form>
+    <form method="get" action="trait_insertion_the.php">
         <div class="mb-3">
             <label for="nom_the" class="form-label">Nom variété</label>
             <input type="text" class="form-control" id="nom_the" name="nom_the" required>

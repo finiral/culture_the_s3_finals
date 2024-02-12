@@ -4,11 +4,11 @@ $nom="Jean";
 $mdp="Jean";
 $check=checklogin($nom,$mdp,1);
 if($check==true){
-    $id=getuser($nom,$mdp,1);
-    var_dump(getinfo($id,"User"));
+    header("Location:admin_model.php");
+
 }
 else{
-    header("Location:model.php?nomPage=admin_login.html");
+    header("Location:../../model.php?nomPage=./admin/admin_login.html");
 }
 
 ?>

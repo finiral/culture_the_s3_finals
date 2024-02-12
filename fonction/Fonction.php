@@ -37,6 +37,14 @@ function getinfo($id,$table){
      }  
     return $rep;
 }
+function selectAll($table)
+    {
+        $base=dbConnect();
+        $requete="select * from ".$table;
+        $result=mysqli_query($base,$requete);
+        $donnees=mysqli_fetch_all($result);
+        return $donnees;
+    }
 function insertvariete($nom,$occupation,$rendement){
     $base=dbconnect();
     $requete="insert into The values(null,'%s','%o','%o')";
