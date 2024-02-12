@@ -1,20 +1,19 @@
-<body>
-    <div class="mb-3">
-        <label for="" class="form-label">Pseudo</label>
-        <input
-            type="text"
-            class="form-control"
-            name="pseudo"
-            id="pseudo"
-            value="jean"
-        />
-        <input
-            type="password"
-            class="form-control"
-            name="mdp"
-            id="mdp"
-            value="jean"
-        />
-        <input type="button" value="submit">
-    </div>
-</body>
+
+
+    <form id="myForm">
+        <h1>Connexion Admin</h1>
+        <br>
+        <div class="form-floating">
+          <input type="text" class="form-control" id="myName" name="nom" placeholder="">
+          <label for="myName">Pseudonyme</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="myPwd" name="pwd" placeholder="">
+          <label for="myPwd">Password</label>
+        </div>
+    
+        <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+        <p class="mt-5 mb-3 text-body-secondary">&copy; 2023–2024</p>
+        <a href="index.php">retour</a>
+      </form>
+
