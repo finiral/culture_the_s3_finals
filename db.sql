@@ -8,6 +8,9 @@ CREATE TABLE User(
     Type_User SMALLINT
 )Engine=innodb;
 
+insert into User(Pseudo,Mdp,Type_User) values ('Pierre',sha1('Pierre'),0);
+insert into User(Pseudo,Mdp,Type_User) values ('Jean',sha1('Jean'),1);
+
 CREATE TABLE The(
     id_The INT AUTO_INCREMENT,
     Nom_The VARCHAR(50),
