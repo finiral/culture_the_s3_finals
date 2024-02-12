@@ -1,11 +1,11 @@
 <?php 
 include "base.php";
-function checklogin($identifiant,$motdepasse){
+function checklogin($identifiant,$motdepasse,$type){
     $rep=false;
    // $mdp=sha1($motdepasse);
     $base=dbConnect();
-    $requete="select * from employes where Email='%s' and mdp='sha1(%s)'";
-    sprintf($requete,$identifiant,$motdepasse);
+    $requete="select * from User where Pseudo='%s' and Mdp='sha1(%s)' and  Type_User='%i'";
+    sprintf($requete,$identifiant,$motdepasse,$type);
     $result=mysqli_query($base,$requete);
     $isa=mysqli_num_rows($result);
     if($isa==1){
@@ -16,10 +16,10 @@ function checklogin($identifiant,$motdepasse){
     }
     return $rep;
 }
-function getuser($identifiant,$motdepasse){
+function getuser($identifiant,$motdepasse,$type){
     $base=dbconnect();
-    $requete="select * from employes where Email='%s' and mdp='sha1(%s)'";
-    sprintf($requete,$identifiant,$motdepasse);
+    $requete="select * from User where Pseudo='%s' and Mdp='sha1(%s)' and Type_User='%i'";
+    sprintf($requete,$identifiant,$motdepasse,$type);
     $result=mysqli_query($base,$requete);
      while($donnees=mysqli_fetch_assoc($result)){
          $rep=$donnees['id'];
