@@ -15,7 +15,6 @@ function checklogin($identifiant,$motdepasse,$type){
         $rep=false;
     }
     return $rep;
-
 }
 function getuser($identifiant,$motdepasse,$type){
     $base=dbconnect();
@@ -117,5 +116,25 @@ function modifMvtDepense($iddepense,$idCateDepense,$montat,$date){
     $requete="update MvtDepense set id_CateDepense='%d',Montant='%o',Date_Depense='%s' where id_Cueilleur='%d'";
     $requete=sprintf($requete,$idCateDepense,$montat,$date,$iddepense);
     $result=mysqli_query($base,$requete);
+}
+function getPoidtotal($date1,$date2){
+    $rep=0;
+    $base=dbconnect();
+    $requete="select sum(Poids_Cueilli) as total from v_cueillette where Date_Cueillette>%s and Date_Cueillette<%s"
+    $requete=sprintf($requete,$date1,$date2);
+    $result=mysqli_query($base,$requete);
+    while($donnees=mysqli_fetch_assoc($result)){
+        $rep=$donnees['total'];
+    }  
+   return $rep;  
+}
+function getpoidrestant($date1,$date2){
+    $poidtotal=getPoidtotal($date1,$date2);
+    $requete="select sum(Surface_Parcelle) as totalParcelle from Cueillette where Date_Cueillette>%s and Date_Cueillette<%s"
+    $requete=sprintf($requete,$date1,$date2);
+    $result=mysqli_query($base,$requete);
+    while($donnees=mysqli_fetch_assoc($result)){
+        $rep=$donnees['totalParcelle'];
+    }
 }
 ?>
