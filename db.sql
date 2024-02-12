@@ -39,7 +39,7 @@ CREATE TABLE CateDepense (
 )Engine=innodb;
 
 CREATE TABLE MvtDepense (
-    id_Depense INT AUTO_INCREMENT PRIMARY KEY,
+    id_MvtDepense INT AUTO_INCREMENT PRIMARY KEY,
     id_CateDepense INT NOT NULL,
     Montant DOUBLE NOT NULL,
     Date_Depense DATE NOT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE MvtDepense (
 )Engine=innodb;
 
 CREATE TABLE MvtSalaire (
-    id_Salaire INT AUTO_INCREMENT PRIMARY KEY,
+    id_MvtSalaire INT AUTO_INCREMENT PRIMARY KEY,
     Montant DOUBLE NOT NULL,
     Date_Salaire DATE NOT NULL
 )Engine=innodb;
