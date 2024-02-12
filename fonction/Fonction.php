@@ -15,6 +15,7 @@ function checklogin($identifiant,$motdepasse,$type){
         $rep=false;
     }
     return $rep;
+    
 }
 function getuser($identifiant,$motdepasse,$type){
     $base=dbconnect();
