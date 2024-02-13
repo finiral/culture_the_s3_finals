@@ -192,10 +192,10 @@ function getCoutPerKg($dt1 , $dt2){
     }  
    return $rep;  
 }
-function insertregeneration($idmois){
+function insertregeneration($idmois,$date){
     $base=dbconnect();
     for($a=0;$a<12;$a++){
-        for($i=0;$i<$idmois.count();$i++){
+        for($i=0;$i<count($idmois);$i++){
             if($idmois[$i]==$a){
                 $requete="insert into saisonregen values(null,'%d',1)";          
             }
@@ -206,5 +206,28 @@ function insertregeneration($idmois){
             $result=mysqli_query($base,$requete);
         }
     }
+}
+function selectpayement($date1,$date2){
+    $base=dbconnect();
+    $requete="select * from v_payement where Date_Cueillette>%d and Date_Cueillette<%d";
+    $requete=sprintf($requete,$date1,$date2);
+    $result=mysqli_query($base,$requete);
+    $donnees=mysqli_fetch_all($result,MYSQLI_ASSOC);
+    return $donnees;
+}
+function payement($date1,$date2){    
+    $donnees=selectpayement($date1,$date2);
+    $rep=array();
+    for($i=0;i<count($donnees);$i++){
+        $payement=$donnees[$i]['Montant']*$donnees[$i]['Poids_Cueilli'];
+        if($donnees[$i]['Poids_Cueilli']<$donnees[$i]['Minimal']){
+            $payement=$payement-(($donnees[$i]['Montant']*$donnees[$i]['Malus'])/100);   
+        }
+        if($donnees[$i]['Poids_Cueilli']>$donnees[$i]['Minimal']){
+            $payement=$payement+(($donnees[$i]['Montant']*$donnees[$i]['Bonus'])/100);   
+        }
+        $rep[$i]=$payement;
+    }
+    return $rep;
 }
 ?>
