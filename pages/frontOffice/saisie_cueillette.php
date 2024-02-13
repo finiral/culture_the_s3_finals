@@ -93,11 +93,7 @@ $parcelle = selectAll("Parcelle");
 
             ///en cas de success
             xhr.addEventListener("load", function(event) {
-                if (xhr.responseText == "ok") {
-                    alert("Insertion réussie !");
-                } else {
-                    alert("Montant cueilli trop élevé.")
-                }
+                alert(xhr.responseText)
             })
         }
     });

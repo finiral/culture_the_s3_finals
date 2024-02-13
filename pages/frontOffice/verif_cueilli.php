@@ -6,10 +6,11 @@
     $poidscueilli=$_POST["poids_cueilli"];
     $reste=getRestantParcelle($idparcelle,$date);
     if($reste<$poidscueilli){
-        echo "blublu";
+        echo json_encode("Insertion Impossible (reste de parcelle insuffisant)");
     }
     else{
+        echo json_encode("Insertion reussie");
         insertCueillette($idcueilleur,$idparcelle,$date,$poidscueilli);
-        echo "ok";
+        
     }
 ?>
