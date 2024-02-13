@@ -19,6 +19,8 @@ CREATE TABLE The(
     PRIMARY KEY (id_The)
 )Engine=innodb;
 
+    alter table the add column PrixVente double;
+
 CREATE TABLE Parcelle (
     id_Parcelle INT AUTO_INCREMENT PRIMARY KEY,
     id_The INT NOT NULL,

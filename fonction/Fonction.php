@@ -45,10 +45,10 @@ function selectAll($table)
         $donnees=mysqli_fetch_all($result,MYSQLI_ASSOC);
         return $donnees;
     }
-function insertvariete($nom,$occupation,$rendement){
+function insertvariete($nom,$occupation,$rendement,$prix){
     $base=dbconnect();
-    $requete="insert into The values(null,'%s','%o','%o')";
-    $requete=sprintf($requete,$nom,$occupation,$rendement);
+    $requete="insert into The values(null,'%s','%o','%o','%d')";
+    $requete=sprintf($requete,$nom,$occupation,$rendement,$prix);
     $result=mysqli_query($base,$requete);
 }
 function modifvariete($idthe,$nom,$occupation,$rendement){
@@ -186,6 +186,34 @@ function getRestantParcelle($idparcelle,$date){
     return $res;
 }
 
+function getrestantParcellemois($idparcelle,$date){
+    $res=0;
+    $mois = date("m", strtotime($date));
+    $donnees=selectAll("saisonregen");
+    for($i=0;$i<count($donnees);$i++){
+        if($mois==$donnees[$i]['id_Moisregen']){
+            if($donnees[$i]['Etat']==1){
+                $res=getRestantParcelle($idparcelle,$date);
+                break;
+            }
+            else{
+                $a=0;
+                for($d=$i;$d>0;$d--){
+                    if($donnees[$d]['Etat']==1){
+                        $a=$d;
+                        break;
+                    }
+                }
+                $dates = new DateTime($date);
+                $dates->modify("-".$a." month"); 
+                $res=getRestantParcelle($idparcelle,$dates);
+            }
+            break;
+        }
+    }
+    return $res;
+}
+
 function getCoutPerKg($dt1 , $dt2){
     $rep=0;
     $base=dbconnect();
@@ -231,7 +259,6 @@ function payement($date1,$date2){
     $rep=array();
     for($i=0;$i<count($donnees);$i++){
         $payement=$donnees[$i]['Montant']*$donnees[$i]['Poids_Cueilli'];
-        echo $payement;
         if($donnees[$i]['Poids_Cueilli']<$donnees[$i]['Minimal']){
             $payement=$payement-(($donnees[$i]['Montant']*$donnees[$i]['Malus'])/100);   
         }
