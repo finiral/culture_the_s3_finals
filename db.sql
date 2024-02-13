@@ -61,10 +61,19 @@ CREATE TABLE MvtSalaire (
     Montant DOUBLE NOT NULL,
     Date_Salaire DATE NOT NULL
 )Engine=innodb;
-create or replace view v_parcellethe as select Parcelle.*,The.nom from Parcelle 
+
+
+create or replace view v_parcellethe as select Parcelle.*,The.Nom_The,The.Occupation,The.Rendement from Parcelle 
 join The on Parcelle.id_The=The.id_The; 
 
 create or replace view v_cueillette as select Cueilleur.Nom_Cueilleur,Parcelle.id_Parcelle,
 Cueillette.Date_Cueillette,Cueillette.Poids_Cueilli from Cueillette join Cueilleur on 
 Cueilleur.id_Cueilleur=Cueillette.id_Cueilleur join Parcelle on 
 Cueillette.id_Parcelle=Parcelle.id_Parcelle;
+
+create or replace view v_rendeparcelle as select (Rendement/Occupation)*Surface_Parcelle*1000,id_Parcelle as rende_Parcelle 
+from v_parcellethe;
+
+create or replace view v_sumcueilletteparcelle as select id_Parcelle ,sum(Poids_Cueilli),Date_Cueillette 
+from v_cueillette
+group by id_Parcelle;
