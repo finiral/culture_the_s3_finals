@@ -1,3 +1,7 @@
+<?php
+include "../../fonction/Fonction.php";
+
+?>
 <div class="form-container">
     <h2 class="mb-4">Insertion variété de thé</h2>
     <form method="get" action="trait_insertion_the.php">
