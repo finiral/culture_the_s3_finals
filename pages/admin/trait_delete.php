@@ -2,8 +2,7 @@
 include "../../fonction/Fonction.php";
 $id=$_GET['id'];
 $table=$_GET['table'];
-$table=ucfirst($table);
-supprimer($id,$table);
+supprimer($id,ucfirst($table));
 if ($table=="MvtSalaire") {
     
     $table="montant";
