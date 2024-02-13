@@ -2,11 +2,13 @@
 include "../../fonction/Fonction.php";
 $poidtotal = 0;
 $cout = 0;
+$ventes=0;
 $parc = array();
 if (isset($_GET["dt1"]) && isset($_GET["dt2"])) {
     $poidtotal = getPoidtotal($_GET["dt1"], $_GET["dt2"]);
     $parc = getpoidrestant($_GET["dt1"], $_GET["dt2"]);
     $cout = getCoutPerKg($_GET["dt1"], $_GET["dt2"]);
+    $ventes=getVentetotal($_GET["dt1"], $_GET["dt2"]);
 }
 ?>
 <div class="form-container">
@@ -69,21 +71,21 @@ if (isset($_GET["dt1"]) && isset($_GET["dt2"])) {
     <table class="table table-striped">
         <tr>
             <th scope="col">Ventes</th>
-            <th scope="col"><?php echo $cout; ?> </th>
+            <th scope="col"><?php echo $ventes; ?> </th>
         </tr>
     </table>
     <h2>Montant des dépenses</h2>
     <table class="table table-striped">
         <tr>
             <th scope="col">Dépenses</th>
-            <th scope="col"><?php echo $cout; ?> </th>
+            <th scope="col"><?php echo 0; ?> </th>
         </tr>
     </table>
     <h2>Bénéfice</h2>
     <table class="table table-striped">
         <tr>
             <th scope="col">Bénefices</th>
-            <th scope="col"><?php echo $cout; ?> </th>
+            <th scope="col"><?php echo 0; ?> </th>
         </tr>
     </table>
 </div>
