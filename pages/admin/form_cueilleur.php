@@ -1,6 +1,6 @@
 <div class="form-container">
     <h2 class="mb-4">Insertion cueilleur</h2>
-    <form>
+    <form method="get" action="trait_insertion_cueilleur.php">
         <div class="mb-3">
             <label for="nom" class="form-label">Nom cueilleur</label>
             <input type="text" class="form-control" id="nom" name="nom" required>

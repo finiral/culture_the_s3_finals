@@ -127,7 +127,7 @@ function modifMvtDepense($iddepense,$idCateDepense,$montat,$date){
 }
 function insertMvtSalaire($montant,$date){
     $base=dbconnect();
-    $requete="insert into MvtSalaire values(null,'%o','%$')";
+    $requete="insert into MvtSalaire values(null,'%d','%s')";
     $requete=sprintf($requete,$montant,$date);
     $result=mysqli_query($base,$requete);
 }

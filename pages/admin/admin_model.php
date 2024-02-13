@@ -1,4 +1,5 @@
 <?php
+session_start();
 if(!isset($_GET["t"]) && !isset($_GET["i"])){
   $table="./table_cueilleur.php";
   $insert="./form_cueilleur.php";
