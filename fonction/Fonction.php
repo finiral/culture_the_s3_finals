@@ -22,7 +22,7 @@ function getuser($identifiant,$motdepasse,$type){
     $requete=sprintf($requete,$identifiant,$motdepasse,$type);
     $result=mysqli_query($base,$requete);
      while($donnees=mysqli_fetch_assoc($result)){
-         $rep=$donnees['id'];
+         $rep=$donnees['id_User'];
      }  
     return $rep;
 } 
@@ -30,13 +30,21 @@ function getinfo($id,$table){
     $rep=array();
     $base=dbconnect();
     $requete="select * from %s where id_%s='%d'";
-    $requete=printf($requete,$table,$table,$id);
+    $requete=sprintf($requete,$table,$table,$id);
     $result=mysqli_query($base,$requete);
      while($donnees=mysqli_fetch_assoc($result)){
-         $rep=$donnees;
+         $rep[]=$donnees;
      }  
     return $rep;
 }
+function selectAll($table)
+    {
+        $base=dbConnect();
+        $requete="select * from ".$table;
+        $result=mysqli_query($base,$requete);
+        $donnees=mysqli_fetch_all($result);
+        return $donnees;
+    }
 function insertvariete($nom,$occupation,$rendement){
     $base=dbconnect();
     $requete="insert into The values(null,'%s','%o','%o')";
@@ -57,13 +65,13 @@ function supprimer($id,$table){
 }
 function insertParcelle($surface,$idthe){
     $base=dbconnect();
-    $requete="insert into Parcelle values(null,'%o','%d')";
-    $requete=sprintf($requete,$surface,$idthe);
+    $requete="insert into Parcelle values(null,'%d','%o')";
+    $requete=sprintf($requete,$idthe,$surface);
     $result=mysqli_query($base,$requete);
 }
 function modifParcelle($idparcelle,$surface,$idthe){
     $base=dbconnect();
-    $requete="update Parcelle set Surface='%o',id_The='%d' where id_Parcelle='%d'";
+    $requete="update Parcelle set Surface_Parcelle='%o',id_The='%d' where id_Parcelle='%d'";
     $requete=sprintf($requete,$surface,$idthe,$idparcelle);
     $result=mysqli_query($base,$requete);
 }
@@ -132,7 +140,7 @@ function modifMvtSalaire($idmvtsalaire,$montat,$date){
 function getPoidtotal($date1,$date2){
     $rep=0;
     $base=dbconnect();
-    $requete="select sum(Poids_Cueilli) as total from v_cueillette where Date_Cueillette>%s and Date_Cueillette<%s"
+    $requete="select sum(Poids_Cueilli) as total from v_cueillette where Date_Cueillette>%s and Date_Cueillette<%s";
     $requete=sprintf($requete,$date1,$date2);
     $result=mysqli_query($base,$requete);
     while($donnees=mysqli_fetch_assoc($result)){
@@ -142,11 +150,13 @@ function getPoidtotal($date1,$date2){
 }
 function getpoidrestant($date1,$date2){
     $poidtotal=getPoidtotal($date1,$date2);
-    $requete="select sum(Surface_Parcelle) as totalParcelle from Cueillette where Date_Cueillette>%s and Date_Cueillette<%s"
+    $requete="select sum(Surface_Parcelle) as totalParcelle from Cueillette where Date_Cueillette>%s and Date_Cueillette<%s";
+    $base=dbconnect();
     $requete=sprintf($requete,$date1,$date2);
     $result=mysqli_query($base,$requete);
     while($donnees=mysqli_fetch_assoc($result)){
         $rep=$donnees['totalParcelle'];
     }
+    return $rep-$poidtotal;
 }
 ?>
