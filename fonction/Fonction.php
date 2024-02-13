@@ -192,4 +192,19 @@ function getCoutPerKg($dt1 , $dt2){
     }  
    return $rep;  
 }
+function insertregeneration($idmois){
+    $base=dbconnect();
+    for($a=0;$a<12;$a++){
+        for($i=0;$i<$idmois.count();$i++){
+            if($idmois[$i]==$a){
+                $requete="insert into saisonregen values(null,'%d',1)";          
+            }
+            else{
+                $requete="insert into saisonregen values(null,'%d',0)";          
+            }
+            $requete=sprintf($requete,$idmois[$i]);
+            $result=mysqli_query($base,$requete);
+        }
+    }
+}
 ?>
