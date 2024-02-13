@@ -2,7 +2,7 @@
 include "../../fonction/Fonction.php";
 $id=$_GET['id'];
 $table=$_GET['table'];
-
+$table=ucfirst($table);
 supprimer($id,$table);
 if ($table=="MvtSalaire") {
     
