@@ -65,13 +65,13 @@ function supprimer($id,$table){
 }
 function insertParcelle($surface,$idthe){
     $base=dbconnect();
-    $requete="insert into Parcelle values(null,'%o','%d')";
-    $requete=sprintf($requete,$surface,$idthe);
+    $requete="insert into Parcelle values(null,'%d','%o')";
+    $requete=sprintf($requete,$idthe,$surface);
     $result=mysqli_query($base,$requete);
 }
 function modifParcelle($idparcelle,$surface,$idthe){
     $base=dbconnect();
-    $requete="update Parcelle set Surface='%o',id_The='%d' where id_Parcelle='%d'";
+    $requete="update Parcelle set Surface_Parcelle='%o',id_The='%d' where id_Parcelle='%d'";
     $requete=sprintf($requete,$surface,$idthe,$idparcelle);
     $result=mysqli_query($base,$requete);
 }
