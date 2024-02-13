@@ -1,5 +1,5 @@
 <?php 
-$table=selectAll("the");
+$table=selectAll("The");
 ?>
 <div class="form-container">
     <h2 class="mb-4">Insertion parcelle</h2>
