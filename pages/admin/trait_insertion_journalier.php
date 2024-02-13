@@ -6,5 +6,5 @@ $malus=$_GET['prctgmal'];
 $date=$_GET['date']; 
 insertcondition($minimal,$bonus,$malus,$date);
 echo "nety";
-header("Location:admin_model.php?t=choix_mois.php");
+header("Location:admin_model.php?regener=choix_mois.php");
 ?>

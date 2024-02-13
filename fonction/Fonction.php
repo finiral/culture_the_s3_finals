@@ -189,7 +189,7 @@ function getRestantParcelle($idparcelle,$date){
 function getCoutPerKg($dt1 , $dt2){
     $rep=0;
     $base=dbconnect();
-    $requete="select sum(Montant)/(select sum(rende_Parcelle) from v_rendeparcelle where date_cueillette>='%s' && date_cueillette<='%s') as coutperkg from mvtdepense where date_depense>='%s' && date_depense<='%s';";
+    $requete="select sum(Montant)/(select sum(rende_Parcelle) from v_rendeparcelle where Date_Cueillette>='%s' && Date_Cueillette<='%s') as coutperkg from MvtDepense where Date_Depense>='%s' && Date_Depense<='%s';";
     $requete=sprintf($requete,$dt1,$dt2,$dt1,$dt2);
     $result=mysqli_query($base,$requete);
     if($donnees=mysqli_fetch_assoc($result)){
@@ -220,7 +220,7 @@ function insertregeneration($idmois,$date){
 }
 function selectpayement($date1,$date2){
     $base=dbconnect();
-    $requete="select * from v_payement where Date_Cueillette>%d and Date_Cueillette<%d";
+    $requete="select * from v_payement where Date_Cueillette>'%s' and Date_Cueillette<'%s'";
     $requete=sprintf($requete,$date1,$date2);
     $result=mysqli_query($base,$requete);
     $donnees=mysqli_fetch_all($result,MYSQLI_ASSOC);
@@ -231,6 +231,7 @@ function payement($date1,$date2){
     $rep=array();
     for($i=0;$i<count($donnees);$i++){
         $payement=$donnees[$i]['Montant']*$donnees[$i]['Poids_Cueilli'];
+        echo $payement;
         if($donnees[$i]['Poids_Cueilli']<$donnees[$i]['Minimal']){
             $payement=$payement-(($donnees[$i]['Montant']*$donnees[$i]['Malus'])/100);   
         }

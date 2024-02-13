@@ -77,7 +77,6 @@ create table cond(
     Malus DOUBLE not null,
     date_condation date not null
 )Engine=innodb;
-alter table condition add column date_condation date;
 create or replace view v_cueillettecondition as select Cueillette.*,condition.* from Cueillette,condition;
 alter table The add column prixvente DOUBLE; 
 insert into Moisregen values(null,'Janvier');

@@ -2,15 +2,15 @@
 include "../../fonction/Fonction.php";
 $table=null;
 $montant=null;
-if (isset($_GET['date_debut']) && isset($_GET['date_fin'])) {
-    $datedebut=$_GET['date_debut'];
-    $datefin=$_GET['date_fin'];
+if (isset($_GET['dt1']) && isset($_GET['dt2'])) {
+    $datedebut=$_GET['dt1'];
+    $datefin=$_GET['dt2'];
     $table=selectpayement($datedebut,$datefin);
     $montant=payement($datedebut,$datefin);
 }
 ?>
 <h2>Paiement pour les clients</h2>
-<form method="GET" action="./user_model.php?nomPage=paiment_cueilleur.php">
+<form method="GET" action="./result_paie.php">
         <div class="mb-3">
             <label for="date_debut" class="form-label">Date de début</label>
             <input type="date" class="form-control" id="date_debut" name="date_debut" required>
@@ -38,11 +38,13 @@ if (isset($_GET['date_debut']) && isset($_GET['date_fin'])) {
           <?php if ($table!=null && $montant!=null) { ?>
             <?php for ($i=0; $i <count($table) ; $i++) { ?>
             <tr>
-                <?php foreach ($table[$i] as $key => $value) { ?>
+                <?php foreach ($table[$i] as $key => $value) { 
+                    if($key!="Minimal" && $key!="Montant"){
+                    ?>
                     <td scope="col"><?php echo $value ?></td>
-                <?php } ?>
+                <?php } }?>
                 
-                <td scope="col"> <?php $montant[$i] ?></td>
+                <td scope="col"> <?php echo $montant[$i] ?></td>
             </tr>
          <?php }} ?>
             
