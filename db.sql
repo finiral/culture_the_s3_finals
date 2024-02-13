@@ -61,8 +61,34 @@ CREATE TABLE MvtSalaire (
     Montant DOUBLE NOT NULL,
     Date_Salaire DATE NOT NULL
 )Engine=innodb;
-
-
+create table Moisregen(
+    id_Moisregen INT AUTO_INCREMENT PRIMARY KEY,
+    Mois VARCHAR(20)
+)Engine=innodb;
+create table saisonregen(
+    id_saisonregen INT AUTO_INCREMENT PRIMARY KEY,
+    id_Moisregen INT REFERENCES Moisregen(id_Moisregen),
+    Etat SMALLINT
+)Engine=innodb;
+create table condition(
+    Minimal DOUBLE not null,
+    Bonus DOUBLE not null,
+    Malus DOUBLE not null
+)Engine=innodb;
+create or replace view v_cueillettecondition as select Cueillette.*,condition.* from Cueillette,condition;
+alter table The add column prixvente DOUBLE; 
+insert into Moisregen values(null,'Janvier');
+insert into Moisregen values(null,'Fevrier');
+insert into Moisregen values(null,'Mars');
+insert into Moisregen values(null,'Avril');
+insert into Moisregen values(null,'Mai');
+insert into Moisregen values(null,'Juin');
+insert into Moisregen values(null,'Juillet');
+insert into Moisregen values(null,'Aout');
+insert into Moisregen values(null,'Septembre');
+insert into Moisregen values(null,'Octobre');
+insert into Moisregen values(null,'Novembre');
+insert into Moisregen values(null,'Decembre');
 create or replace view v_parcellethe as select Parcelle.*,The.Nom_The,The.Occupation,The.Rendement from Parcelle 
 join The on Parcelle.id_The=The.id_The; 
 
