@@ -125,6 +125,18 @@ function modifMvtDepense($iddepense,$idCateDepense,$montat,$date){
     $requete=sprintf($requete,$idCateDepense,$montat,$date,$iddepense);
     $result=mysqli_query($base,$requete);
 }
+function insertMvtSalaire($montant,$date){
+    $base=dbconnect();
+    $requete="insert into MvtSalaire values(null,'%o','%$')";
+    $requete=sprintf($requete,$montant,$date);
+    $result=mysqli_query($base,$requete);
+}
+function modifMvtSalaire($idmvtsalaire,$montat,$date){
+    $base=dbconnect();
+    $requete="update MvtSalaire set Montant='%o',Date_Salaire='%s' where id_MvtSalaire='%d'";
+    $requete=sprintf($requete,$montat,$date,$idmvtsalaire);
+    $result=mysqli_query($base,$requete);
+}
 function getPoidtotal($date1,$date2){
     $rep=0;
     $base=dbconnect();
