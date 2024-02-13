@@ -63,7 +63,27 @@ if (isset($_GET["dt1"]) && isset($_GET["dt2"])) {
         <tr>
             <th scope="col">Cout / kg</th>
             <th scope="col"><?php echo $cout; ?> kg</th>
-
+        </tr>
+    </table>
+    <h2>Montant des ventes</h2>
+    <table class="table table-striped">
+        <tr>
+            <th scope="col">Ventes</th>
+            <th scope="col"><?php echo $cout; ?> </th>
+        </tr>
+    </table>
+    <h2>Montant des dépenses</h2>
+    <table class="table table-striped">
+        <tr>
+            <th scope="col">Dépenses</th>
+            <th scope="col"><?php echo $cout; ?> </th>
+        </tr>
+    </table>
+    <h2>Bénéfice</h2>
+    <table class="table table-striped">
+        <tr>
+            <th scope="col">Bénefices</th>
+            <th scope="col"><?php echo $cout; ?> </th>
         </tr>
     </table>
 </div>

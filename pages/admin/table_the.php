@@ -12,6 +12,7 @@ $table=selectAll("The");
         <th scope="col">Nom</th>
         <th scope="col">Occupation</th>
         <th scope="col">Rendement</th>
+        <th scope="col">Prix de vente</th>
         <th scope="col">Modifier</th>
         <th scope="col">Supprimer</th>
       </tr>

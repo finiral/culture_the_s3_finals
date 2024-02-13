@@ -21,6 +21,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="user_model.php?page=resultat.php">Résultats</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="user_model.php?page=paiement_cueilleur.php">Paiements pour cueilleur</a>
+                </li>
             </ul>
             <form class="d-flex my-2 my-lg-0">
                 <a class="btn btn-outline-warning my-2 my-sm-0" type="submit" href="sign_out_user.php">

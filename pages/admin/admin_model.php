@@ -1,12 +1,13 @@
 <?php
 session_start();
-if(!isset($_GET["t"]) && !isset($_GET["i"])){
-  $table="./table_cueilleur.php";
-  $insert="./form_cueilleur.php";
-}
-else{
-  $table=$_GET["t"];
-  $insert=$_GET["i"];
+if (!isset($_GET["t"]) && !isset($_GET["i"]) && !isset($_GET["regener"])) {
+  $table = "./table_cueilleur.php";
+  $insert = "./form_cueilleur.php";
+} else if (isset($_GET["regener"])) {
+  $table = "./choix_mois.php";
+} else {
+  $table = $_GET["t"];
+  $insert = $_GET["i"];
 }
 ?>
 <!doctype html>
@@ -242,7 +243,10 @@ else{
       <!-- CONTENT -->
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <?php include $table; ?>
-        <?php include $insert; ?>
+        <?php
+        if (!isset($_GET["regener"])) {
+          include $insert;
+        } ?>
       </main>
     </div>
   </div>

@@ -16,6 +16,10 @@
             <label for="rendement" class="form-label">Rendement</label>
             <input type="number" class="form-control" id="rendement" name="rendement" required>
         </div>
+        <div class="mb-3">
+            <label for="prixvente" class="form-label">Prix de vente</label>
+            <input type="number" class="form-control" id="prixvente" name="prixvente" required>
+        </div>
         <button type="submit" class="btn btn-primary">Insérer</button>
     </form>
 </div>
