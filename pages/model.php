@@ -20,13 +20,10 @@ $nomPage = $_GET['nomPage'];
 
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
     <main class="form-signin w-100 m-auto">
-        <div class="content">
+        <div class="">
             <?php include $nomPage; ?>
         </div>
     </main>
-    <footer class="footer">
-        <p>ETU002708-ETU002526-ETU002454</p>
-    </footer>
 
 
     <!-- drop down changement theme -->

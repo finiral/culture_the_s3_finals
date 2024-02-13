@@ -23,9 +23,9 @@
                 </li>
             </ul>
             <form class="d-flex my-2 my-lg-0">
-                <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">
+                <a class="btn btn-outline-warning my-2 my-sm-0" type="submit" href="sign_out_user.php">
                     Sign-out
-                </button>
+                </a>
             </form>
         </div>
     </div>
