@@ -107,3 +107,6 @@ from v_parcellethe join v_cueillette on v_cueillette.id_Parcelle=v_parcellethe.i
 create or replace view v_sumcueilletteparcelle as select id_Parcelle ,sum(Poids_Cueilli),Date_Cueillette 
 from v_cueillette
 group by id_Parcelle;
+
+create or replace view v_payement as select v_cueillette.Date_Cueillette,v_cueillette.Nom_Cueilleur,v_cueillette.Poids_Cueilli,condition.Bonus,
+condition.Malus,condition.Minimal,MvtSalaire.Montant from v_cueillette,condition,MvtSalaire;
