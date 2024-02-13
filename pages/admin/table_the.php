@@ -25,8 +25,8 @@ $table=selectAll("The");
           } else { ?>
           <td scope="col"><?php echo $value ?></td>
           <?php }} ?>
-        <td scope="col"><a href="./trait_modif.php?idthe=<?php echo $id."&table=the"?>">Edit</a></td>
-        <td scope="col"><a href="./trait_delete.php?idthe=<?php echo $id."&table=the"?>">Delete</a></td>
+        <td scope="col"><a href="./trait_modif.php?id=<?php echo $id."&table=the"?>">Edit</a></td>
+        <td scope="col"><a href="./trait_delete.php?id=<?php echo $id."&table=the"?>">Delete</a></td>
        </tr>
       <?php } ?>
       
