@@ -1,6 +1,6 @@
 <?php 
 include "../../fonction/Fonction.php";
-$table=selectAll("catedepense");
+$table=selectAll("Catedepense");
 
 ?>
 <br>
@@ -23,7 +23,7 @@ $table=selectAll("catedepense");
           <?php } else { ?>
           <td scope="col"><?php echo $value ?></td>
           <?php }} ?>
-        <td scope="col"><a href="./trait_modif.php?id=<?php echo $id."&table=catedepense"?>">Edit</a></td>
+        <td scope="col"><a href="./trait_modif.php?id=<?php echo $id."&table=Catedepense"?>">Edit</a></td>
         <td scope="col"><a href="./trait_delete.php?id=<?php echo $id."&table=catedepense"?>">Delete</a></td>
        </tr>
       <?php } ?>

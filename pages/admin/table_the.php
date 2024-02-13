@@ -1,6 +1,6 @@
 <?php
 include "../../fonction/Fonction.php";
-$table=selectAll("the");
+$table=selectAll("The");
 
 ?>
 <br>

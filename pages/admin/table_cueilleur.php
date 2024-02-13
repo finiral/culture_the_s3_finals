@@ -1,6 +1,6 @@
 <?php 
 include "../../fonction/Fonction.php";
-$table=selectAll("cueilleur");
+$table=selectAll("Cueilleur");
 ?>
 <br>
 <h2>Liste cueilleur</h2>
@@ -23,7 +23,7 @@ $table=selectAll("cueilleur");
           <?php } else { ?>
           <td scope="col"><?php echo $value ?></td>
           <?php }} ?>
-        <td scope="col"><a href="./trait_modif.php?id=<?php echo $id."&table=cueilleur"?>">Edit</a></td>
+        <td scope="col"><a href="./trait_modif.php?id=<?php echo $id."&table=Cueilleur"?>">Edit</a></td>
         <td scope="col"><a href="./trait_delete.php?id=<?php echo $id."&table=cueilleur"?>">Delete</a></td>
        </tr>
       <?php } ?>
