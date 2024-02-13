@@ -159,7 +159,12 @@ function getpoidrestant($date1,$date2){
     }
     return $rep;
 }
-
+function insertcondition($minimal,$bonus,$malus,$date){
+    $base=dbConnect();
+    $requete="insert into cond values('%d','%d','%d','%s')";
+    $requete=sprintf($requete,$minimal,$bonus,$malus,$date);
+    $result=mysqli_query($base,$requete);
+}
 function getRestantParcelle($idparcelle,$date){
     $res=0;
     $base=dbConnect();
@@ -170,8 +175,8 @@ function getRestantParcelle($idparcelle,$date){
     while($donnees=mysqli_fetch_assoc($rep)){
         $rendement=$donnees['rende_Parcelle'];
     }
-    $requete="select id_Parcelle ,sum(Poids_Cueilli) as somme,Date_Cueillette from v_cueillette where Date_Cueillette<='%s' group by id_Parcelle";
-    $requete=sprintf($requete,$date);
+    $requete="select id_Parcelle ,sum(Poids_Cueilli) as somme,Date_Cueillette from v_cueillette where Date_Cueillette<='%s' and id_Parcelle='%d' group by id_Parcelle";
+    $requete=sprintf($requete,$date,$idparcelle);
     $totalCueillette=0;
     $rep=mysqli_query($base,$requete);
     while($donnees=mysqli_fetch_assoc($rep)){
@@ -194,17 +199,23 @@ function getCoutPerKg($dt1 , $dt2){
 }
 function insertregeneration($idmois,$date){
     $base=dbconnect();
-    for($a=0;$a<12;$a++){
+    for($a=1;$a<=12;$a++){
+        $is=false;
         for($i=0;$i<count($idmois);$i++){
             if($idmois[$i]==$a){
-                $requete="insert into saisonregen values(null,'%d',1)";          
-            }
-            else{
-                $requete="insert into saisonregen values(null,'%d',0)";          
-            }
-            $requete=sprintf($requete,$idmois[$i]);
+                $is=true;
+                $requete="insert into saisonregen values(null,'%d',1,'%s')"; 
+                $requete=sprintf($requete,$idmois[$i],$date);
+                $result=mysqli_query($base,$requete);  
+                break;      
+            }          
+        }
+        if($is==false){
+            $requete="insert into saisonregen values(null,'%d',0,'%s')"; 
+            $requete=sprintf($requete,$a,$date);
             $result=mysqli_query($base,$requete);
         }
+
     }
 }
 function selectpayement($date1,$date2){
@@ -218,7 +229,7 @@ function selectpayement($date1,$date2){
 function payement($date1,$date2){    
     $donnees=selectpayement($date1,$date2);
     $rep=array();
-    for($i=0;i<count($donnees);$i++){
+    for($i=0;$i<count($donnees);$i++){
         $payement=$donnees[$i]['Montant']*$donnees[$i]['Poids_Cueilli'];
         if($donnees[$i]['Poids_Cueilli']<$donnees[$i]['Minimal']){
             $payement=$payement-(($donnees[$i]['Montant']*$donnees[$i]['Malus'])/100);   

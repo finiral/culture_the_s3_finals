@@ -70,11 +70,14 @@ create table saisonregen(
     id_Moisregen INT REFERENCES Moisregen(id_Moisregen),
     Etat SMALLINT
 )Engine=innodb;
-create table condition(
+alter table saisonregen add column date_saisonregen date;
+create table cond(
     Minimal DOUBLE not null,
     Bonus DOUBLE not null,
-    Malus DOUBLE not null
+    Malus DOUBLE not null,
+    date_condation date not null
 )Engine=innodb;
+alter table condition add column date_condation date;
 create or replace view v_cueillettecondition as select Cueillette.*,condition.* from Cueillette,condition;
 alter table The add column prixvente DOUBLE; 
 insert into Moisregen values(null,'Janvier');
@@ -108,5 +111,15 @@ create or replace view v_sumcueilletteparcelle as select id_Parcelle ,sum(Poids_
 from v_cueillette
 group by id_Parcelle;
 
-create or replace view v_payement as select v_cueillette.Date_Cueillette,v_cueillette.Nom_Cueilleur,v_cueillette.Poids_Cueilli,condition.Bonus,
-condition.Malus,condition.Minimal,MvtSalaire.Montant from v_cueillette,condition,MvtSalaire;
+
+create view v_latest_cond as select c.Minimal,c.Bonus,c.Malus,c.date_condation from cond c 
+join(select Minimal,MAX(date_condation) as  maxdate from cond group by Minimal) 
+latest on c.Minimal=latest.Minimal and c.date_condation=latest.MaxDate;
+
+create view v_latest_salaire as
+SELECT * 
+FROM MvtSalaire
+WHERE Date_Salaire = (SELECT MAX(Date_Salaire) FROM MvtSalaire);
+
+create or replace view v_payement as select v_cueillette.Date_Cueillette,v_cueillette.Nom_Cueilleur,v_cueillette.Poids_Cueilli,(select Bonus from v_latest_cond) as Bonus,
+(select Malus from v_latest_cond) as Malus,(select Minimal from v_latest_cond)  as Minimal ,(select Montant from v_latest_salaire) as Montant from v_cueillette;
