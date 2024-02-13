@@ -123,7 +123,7 @@ function insertMvtSalaire($montant,$date){
     $requete=sprintf($requete,$montant,$date);
     $result=mysqli_query($base,$requete);
 }
-function modifMvtDepense($idmvtsalaire,$montat,$date){
+function modifMvtSalaire($idmvtsalaire,$montat,$date){
     $base=dbconnect();
     $requete="update MvtSalaire set Montant='%o',Date_Salaire='%s' where id_MvtSalaire='%d'";
     $requete=sprintf($requete,$montat,$date,$idmvtsalaire);
