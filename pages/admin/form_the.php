@@ -1,5 +1,4 @@
 <?php
-include "../../fonction/Fonction.php";
 
 ?>
 <div class="form-container">

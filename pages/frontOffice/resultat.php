@@ -1,14 +1,25 @@
+<?php 
+    include "../../fonction/Fonction.php";
+    $poidtotal=0;
+    $cout=0;
+    $parc=array();
+    if(isset($_GET["dt1"]) && isset($_GET["dt2"])){
+        $poidtotal=getPoidtotal($_GET["dt1"],$_GET["dt2"]);
+        $parc=getpoidrestant($_GET["dt1"],$_GET["dt2"]);
+        $cout=getCoutPerKg($_GET["dt1"],$_GET["dt2"]);
+    }
+?>
 <div class="form-container">
     <h2 class="mb-4">Résultats globals</h2>
-    <form>
+    <form method="GET" action="result_datas.php">
         <div class="mb-3">
             <label for="date_debut" class="form-label">Date de début</label>
-            <input type="date" class="form-control" id="date_debut" name="date_depense" required>
+            <input type="date" class="form-control" id="date_debut" name="date_debut" required>
         </div>
 
         <div class="mb-3">
             <label for="date_fin" class="form-label">Date de fin</label>
-            <input type="date" class="form-control" id="date_fin" name="date_depense" required>
+            <input type="date" class="form-control" id="date_fin" name="date_fin" required>
         </div>
         <button type="submit" class="btn btn-success">Confirmer</button>
     </form>
@@ -17,25 +28,9 @@
     <h2>Poids total Cueillette</h2>
     <div class="table-responsive">
         <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Cueilleur</th>
-                    <th scope="col">Parcelle</th>
-                    <th scope="col">Date cueillette</th>
-                    <th scope="col">Poids cueilli</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td scope="col">Test</td>
-                    <td scope="col">Test</td>
-                    <td scope="col">Test</td>
-                    <td scope="col">Test</td>
-                </tr>
-            </tbody>
             <tr>
                 <th scope="col">Poids total</th>
-                <th scope="col">900 kg</th>
+                <th scope="col"><?php echo $poidtotal;?> kg</th>
 
             </tr>
         </table>
@@ -46,25 +41,27 @@
             <thead>
                 <tr>
                     <th scope="col">Numero parcelle</th>
-                    <th scope="col">Poids cultivé</th>
-                    <th scope="col">Poids cueilli</th>
                     <th scope="col">Poids restant</th>
+                    <th scope="col">Date</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td scope="col">Test</td>
-                    <td scope="col">Test</td>
-                    <td scope="col">Test</td>
-                    <td scope="col">Test</td>
+                    <?php for($i=0 ; $i<count($parc) ; $i++){?>
+                        <td scope="col"><?php echo $parc[$i]["id_Parcelle"];?></td>
+                        <td scope="col"><?php echo $parc[$i]["restant"];?></td>
+                        <td scope="col"><?php echo $parc[$i]["Date_Cueillette"];?></td>
+                    <?php }?>
                 </tr>
             </tbody>
-            <tr>
-                <th scope="col">Poids total restant</th>
-                <th scope="col">500 kg</th>
-            </tr>
         </table>
     </div>
     <h2>Cout de revient / kg</h2>
+    <table class="table table-striped">
+            <tr>
+                <th scope="col">Cout / kg</th>
+                <th scope="col"><?php echo $cout;?> kg</th>
 
+            </tr>
+        </table>
 </div>

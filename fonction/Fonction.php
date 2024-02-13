@@ -115,7 +115,7 @@ function modifCateDepense($idCateDepense,$nom){
 }
 function insertMvtDepense($idCateDepense,$montat,$date){
     $base=dbconnect();
-    $requete="insert into MvtDepense values(null,'%d','%o','%$')";
+    $requete="insert into MvtDepense values(null,'%d','%d','%s')";
     $requete=sprintf($requete,$idCateDepense,$montat,$date);
     $result=mysqli_query($base,$requete);
 }
@@ -140,23 +140,56 @@ function modifMvtSalaire($idmvtsalaire,$montat,$date){
 function getPoidtotal($date1,$date2){
     $rep=0;
     $base=dbconnect();
-    $requete="select sum(Poids_Cueilli) as total from v_cueillette where Date_Cueillette>%s and Date_Cueillette<%s";
+    $requete="select sum(Poids_Cueilli) as total from v_cueillette where Date_Cueillette>'%s' and Date_Cueillette<'%s'";
     $requete=sprintf($requete,$date1,$date2);
     $result=mysqli_query($base,$requete);
-    while($donnees=mysqli_fetch_assoc($result)){
+    if($donnees=mysqli_fetch_assoc($result)){
         $rep=$donnees['total'];
     }  
    return $rep;  
 }
 function getpoidrestant($date1,$date2){
-    $poidtotal=getPoidtotal($date1,$date2);
-    $requete="select sum(Surface_Parcelle) as totalParcelle from Cueillette where Date_Cueillette>%s and Date_Cueillette<%s";
+    $requete="select id_Parcelle,restant,Date_Cueillette from v_rendeparcelle where Date_Cueillette>'%s' and Date_Cueillette<'%s'";
     $base=dbconnect();
     $requete=sprintf($requete,$date1,$date2);
     $result=mysqli_query($base,$requete);
+    $rep=array();
     while($donnees=mysqli_fetch_assoc($result)){
-        $rep=$donnees['totalParcelle'];
+        $rep[]=$donnees;
     }
-    return $rep-$poidtotal;
+    return $rep;
+}
+
+function getRestantParcelle($idparcelle,$date){
+    $res=0;
+    $base=dbConnect();
+    $rendement=0;
+    $requete="select rende_Parcelle from v_rendeparcelle where id_Parcelle='%d'";
+    $requete=sprintf($requete,$idparcelle);
+    $rep=mysqli_query($base,$requete);
+    while($donnees=mysqli_fetch_assoc($rep)){
+        $rendement=$donnees['rende_Parcelle'];
+    }
+    $requete="select id_Parcelle ,sum(Poids_Cueilli) as somme,Date_Cueillette from v_cueillette where Date_Cueillette<='%s' group by id_Parcelle";
+    $requete=sprintf($requete,$date);
+    $totalCueillette=0;
+    $rep=mysqli_query($base,$requete);
+    while($donnees=mysqli_fetch_assoc($rep)){
+        $totalCueillette=$donnees['somme'];
+    }
+    $res=$rendement-$totalCueillette;
+    return $res;
+}
+
+function getCoutPerKg($dt1 , $dt2){
+    $rep=0;
+    $base=dbconnect();
+    $requete="select sum(Montant)/(select sum(rende_Parcelle) from v_rendeparcelle where date_cueillette>='%s' && date_cueillette<='%s') as coutperkg from mvtdepense where date_depense>='%s' && date_depense<='%s';";
+    $requete=sprintf($requete,$dt1,$dt2,$dt1,$dt2);
+    $result=mysqli_query($base,$requete);
+    if($donnees=mysqli_fetch_assoc($result)){
+        $rep=$donnees['coutperkg'];
+    }  
+   return $rep;  
 }
 ?>
