@@ -9,7 +9,7 @@ if($check==true){
     header("Location:admin_model.php");
 }
 else{
-    header("Location:../../model.php?nomPage=./admin/admin_login.html");
+    header("Location:../../pages/model.php?nomPage=admin/admin_login.html");
 }
 
 ?>

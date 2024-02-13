@@ -1,13 +1,13 @@
-<?php 
-    include "../../fonction/Fonction.php";
-    $poidtotal=0;
-    $cout=0;
-    $parc=array();
-    if(isset($_GET["dt1"]) && isset($_GET["dt2"])){
-        $poidtotal=getPoidtotal($_GET["dt1"],$_GET["dt2"]);
-        $parc=getpoidrestant($_GET["dt1"],$_GET["dt2"]);
-        $cout=getCoutPerKg($_GET["dt1"],$_GET["dt2"]);
-    }
+<?php
+include "../../fonction/Fonction.php";
+$poidtotal = 0;
+$cout = 0;
+$parc = array();
+if (isset($_GET["dt1"]) && isset($_GET["dt2"])) {
+    $poidtotal = getPoidtotal($_GET["dt1"], $_GET["dt2"]);
+    $parc = getpoidrestant($_GET["dt1"], $_GET["dt2"]);
+    $cout = getCoutPerKg($_GET["dt1"], $_GET["dt2"]);
+}
 ?>
 <div class="form-container">
     <h2 class="mb-4">Résultats globals</h2>
@@ -30,7 +30,7 @@
         <table class="table table-striped">
             <tr>
                 <th scope="col">Poids total</th>
-                <th scope="col"><?php echo $poidtotal;?> kg</th>
+                <th scope="col"><?php echo $poidtotal; ?> kg</th>
 
             </tr>
         </table>
@@ -46,22 +46,24 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <?php for($i=0 ; $i<count($parc) ; $i++){?>
-                        <td scope="col"><?php echo $parc[$i]["id_Parcelle"];?></td>
-                        <td scope="col"><?php echo $parc[$i]["restant"];?></td>
-                        <td scope="col"><?php echo $parc[$i]["Date_Cueillette"];?></td>
-                    <?php }?>
-                </tr>
+                <?php for ($i = 0; $i < count($parc); $i++) { ?>
+
+                    <tr>
+                        <td scope="col"><?php echo $parc[$i]["id_Parcelle"]; ?></td>
+                        <td scope="col"><?php echo $parc[$i]["restant"]; ?></td>
+                        <td scope="col"><?php echo $parc[$i]["Date_Cueillette"]; ?></td>
+
+                    </tr>
+                <?php } ?>
             </tbody>
         </table>
     </div>
     <h2>Cout de revient / kg</h2>
     <table class="table table-striped">
-            <tr>
-                <th scope="col">Cout / kg</th>
-                <th scope="col"><?php echo $cout;?> kg</th>
+        <tr>
+            <th scope="col">Cout / kg</th>
+            <th scope="col"><?php echo $cout; ?> kg</th>
 
-            </tr>
-        </table>
+        </tr>
+    </table>
 </div>
