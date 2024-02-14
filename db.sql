@@ -109,7 +109,7 @@ v_cueillette.Date_Cueillette
 from v_parcellethe left join v_cueillette on v_cueillette.id_Parcelle=v_parcellethe.id_Parcelle;
 
 create or replace view v_sumcueilletteparcelle as select id_Parcelle ,sum(Poids_Cueilli),Date_Cueillette 
-from v_cueillette
+from v_cueillette 
 group by id_Parcelle;
 
 
