@@ -140,7 +140,7 @@ function modifMvtSalaire($idmvtsalaire,$montat,$date){
 function getPoidtotal($date1,$date2){
     $rep=0;
     $base=dbconnect();
-    $requete="select sum(Poids_Cueilli) as total from v_cueillette where Date_Cueillette>'%s' and Date_Cueillette<'%s'";
+    $requete="select sum(Poids_Cueilli) as total from v_cueillette where Date_Cueillette>='%s' and Date_Cueillette<='%s'";
     $requete=sprintf($requete,$date1,$date2);
     $result=mysqli_query($base,$requete);
     if($donnees=mysqli_fetch_assoc($result)){
@@ -152,7 +152,7 @@ function getPoidtotal($date1,$date2){
 function getVentetotal($date1,$date2){
     $rep=0;
     $base=dbconnect();
-    $requete="select sum(PrixVente) as Vente from Cueillette join Parcelle on Parcelle.id_Parcelle=Cueillette.id_Parcelle join The on The.id_The=Parcelle.id_The where Date_Cueillette>'%s' and Date_Cueillette<'%s'group by PrixVente;";
+    $requete="select sum(PrixVente) as Vente from Cueillette join Parcelle on Parcelle.id_Parcelle=Cueillette.id_Parcelle join The on The.id_The=Parcelle.id_The where Date_Cueillette>='%s' and Date_Cueillette<='%s'group by PrixVente;";
     $requete=sprintf($requete,$date1,$date2);
     $result=mysqli_query($base,$requete);
     if($donnees=mysqli_fetch_assoc($result)){
@@ -162,7 +162,7 @@ function getVentetotal($date1,$date2){
 }
 
 function getpoidrestant($date1,$date2){
-    $requete="select id_Parcelle,restant,Date_Cueillette from v_rendeparcelle where Date_Cueillette>'%s' and Date_Cueillette<'%s'";
+    $requete="select id_Parcelle,restant,Date_Cueillette from v_rendeparcelle where Date_Cueillette>='%s' and Date_Cueillette<='%s'";
     $base=dbconnect();
     $requete=sprintf($requete,$date1,$date2);
     $result=mysqli_query($base,$requete);
@@ -261,7 +261,7 @@ function insertregeneration($idmois,$date){
 }
 function selectpayement($date1,$date2){
     $base=dbconnect();
-    $requete="select * from v_payement where Date_Cueillette>'%s' and Date_Cueillette<'%s'";
+    $requete="select * from v_payement where Date_Cueillette>='%s' and Date_Cueillette<='%s'";
     $requete=sprintf($requete,$date1,$date2);
     $result=mysqli_query($base,$requete);
     $donnees=mysqli_fetch_all($result,MYSQLI_ASSOC);
