@@ -105,7 +105,7 @@ create or replace view v_rendeparcelle as
 select (Rendement/Occupation)*v_parcellethe.Surface_Parcelle*1000 as rende_Parcelle ,
 v_parcellethe.id_Parcelle ,v_cueillette.Poids_Cueilli as poids_cuelli, 
 (Rendement/Occupation)*v_parcellethe.Surface_Parcelle*1000-v_cueillette.Poids_Cueilli as restant,
-v_cueillette.Date_Cueillette
+v_cueillette.Date_Cueillette 
 from v_parcellethe left join v_cueillette on v_cueillette.id_Parcelle=v_parcellethe.id_Parcelle;
 
 create or replace view v_sumcueilletteparcelle as select id_Parcelle ,sum(Poids_Cueilli),Date_Cueillette 
