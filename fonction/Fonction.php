@@ -196,6 +196,7 @@ function getRestantParcelle($idparcelle,$date){
         $totalCueillette=$donnees['somme'];
     }
     $res=$rendement-$totalCueillette;
+    echo $rendement;
     return $res;
 }
 
